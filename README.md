@@ -1,16 +1,56 @@
-# React + Vite
+*Bootstrap. This app allows users to view, search, filter, add, edit, and delete movies. All custom movies are stored in **localStorage*, ensuring persistence across page reloads.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+##  Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- *Fetch Movies from API*  
+  Loads initial movie data from a public movie dataset hosted on GitHub.
 
-## React Compiler
+- *Add / Edit Movies*  
+  Users can create a new movie or update an existing one using a popup modal form.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- *Image Upload Support*  
+  Upload a thumbnail image and preview it instantly before saving.
 
-## Expanding the ESLint configuration
+- *Search Filter*  
+  Easily search movies by title.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- *Genre Filter*  
+  Filter movies by genre using a dynamic dropdown.
+
+- *Pagination*  
+  Movies are displayed in pages of 20 for better readability.
+
+- *Movie Table*  
+  Clean table layout showing title, year, cast, genres, thumbnail, and actions.
+
+- *LocalStorage Support*  
+  Only user-created movies are stored to avoid heavy storage usage.
+
+- *Popup Modal Component*  
+  Custom popup built using React Portals.
+
+- *Responsive UI*  
+  Works seamlessly across mobile, tablet, and desktop screens.
+
+---
+
+## Technologies Used
+
+- *React* (Functional Components + Hooks)  
+- *React Router* for navigation  
+- *Bootstrap 5* for UI styling  
+- *LocalStorage* for user movies  
+- *Fetch API* to load initial movie data  
+- *React Portals* for popup modals  
+
+---
+
+## Installation
+
+1. *Clone the repository:*
+
+```bash
+git clone <your-repository-url>
+cd movie-list-react

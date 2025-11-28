@@ -1,20 +1,21 @@
-import React from 'react'
-import Movies from './Pages/Movie'
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./Component/Home";
+import Movies from "./Pages/Movie";
+import Navbar from "./Component/Navbar";
+
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
+      <Navbar/>
 
-    <nav className="navbar navbar-dark bg-dark px-3">
-  <a className="navbar-brand text-light" href="#">
-    Movie List 🎥🍿
-  </a>
-</nav>
-
-<Movies/>
-    
-    </>
-  )
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/movies" element={<Movies/>} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

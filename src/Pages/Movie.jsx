@@ -4,6 +4,7 @@ import GenreFilter from "../Component/GenreFilter";
 import MovieTable from "../Component/MovieTable";
 import MovieForm from "../Component/MovieForm";
 import Popup from "../Component/Popup";
+import '../home.css'
 
 export default function Movies() {
 
@@ -19,7 +20,6 @@ export default function Movies() {
   const [currentPage, setCurrentPage] = useState(1);
 
 
-
   useEffect(() => {
     const stored = loadAllMovies();
 
@@ -32,16 +32,14 @@ export default function Movies() {
         .then(res => res.json())
         .then(data => {
 
-        
           const withImages = data.filter(m => m.thumbnail);
 
-        
           const cleanData = withImages.slice(0, 500).map(m => ({
             title: m.title,
             year: m.year,
             cast: m.cast || [],
             genres: m.genres || [],
-            thumbnail: m.thumbnail, 
+            thumbnail: m.thumbnail,
             isCustom: false
           }));
 
@@ -54,9 +52,7 @@ export default function Movies() {
   }, []);
 
 
-
   useEffect(() => setCurrentPage(1), [search, selectedGenres, movies]);
-
 
 
   const filteredMovies = movies.filter(m => {
@@ -70,11 +66,9 @@ export default function Movies() {
 
 
   const totalPages = Math.ceil(filteredMovies.length / itemsPerPage);
-
   const lastIndex = currentPage * itemsPerPage;
   const firstIndex = lastIndex - itemsPerPage;
   const currentMovies = filteredMovies.slice(firstIndex, lastIndex);
-
 
 
   function loadGenres(list) {
@@ -82,7 +76,6 @@ export default function Movies() {
     list.forEach(m => m.genres.forEach(g => all.add(g)));
     setGenres([...all]);
   }
-
 
   function addMovie() {
     setEditMovie(null);
@@ -121,26 +114,47 @@ export default function Movies() {
 
 
   return (
-    <div className="container mt-4">
+    <div className="container-fluid  bg-container">
 
-      <button className="btn btn-dark float-end mb-2" onClick={addMovie}>
-        Add Movie
-      </button>
+    
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="fw-bold mt-2">🎬 Movie Manager</h2>
+        <button className="btn btn-dark" onClick={addMovie}>
+          + Add Movie
+        </button>
+      </div>
 
-      <input
-        className="form-control my-3"
-        placeholder="Search by title..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+   
+      <div className="row mb-4">
 
- 
-      <GenreFilter
-        genres={genres}
-        selected={selectedGenres}
-        setSelected={setSelectedGenres}
-      />
+      
+        <div className="col-md-6 mb-3">
+          <div className="card p-3 shadow-sm">
+            <input
+              className="form-control"
+              placeholder="🔍 Search by movie title..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+        </div>
 
+        {/* Genre Select Dropdown */}
+        <div className="col-md-6 mb-3">
+          <div className="card p-3 shadow-sm">
+            <h5 className="mb-3">Select Genre</h5>
+
+            <GenreFilter
+              genres={genres}
+              selected={selectedGenres}
+              setSelected={setSelectedGenres}
+            />
+          </div>
+        </div>
+
+      </div>
+
+   
       <MovieTable
         movies={currentMovies}
         handleEdit={handleEdit}
@@ -148,9 +162,9 @@ export default function Movies() {
       />
 
      
-      <div className="d-flex justify-content-center align-items-center mt-3 gap-2 flex-wrap">
+      <div className="d-flex justify-content-center align-items-center mt-4 gap-2 flex-wrap">
         <button
-          className="btn btn-secondary"
+          className="btn btn-outline-secondary"
           disabled={currentPage === 1}
           onClick={() => setCurrentPage(currentPage - 1)}
         >
@@ -160,7 +174,9 @@ export default function Movies() {
         {[...Array(totalPages)].map((_, i) => (
           <button
             key={i}
-            className={`btn ${currentPage === i + 1 ? "btn-primary" : "btn-outline-primary"}`}
+            className={`btn px-3 ${
+              currentPage === i + 1 ? "btn-primary" : "btn-outline-primary"
+            }`}
             onClick={() => setCurrentPage(i + 1)}
           >
             {i + 1}
@@ -168,7 +184,7 @@ export default function Movies() {
         ))}
 
         <button
-          className="btn btn-secondary"
+          className="btn btn-outline-secondary"
           disabled={currentPage === totalPages}
           onClick={() => setCurrentPage(currentPage + 1)}
         >
@@ -176,7 +192,7 @@ export default function Movies() {
         </button>
       </div>
 
-
+      {/* POPUP */}
       {showPopup && (
         <Popup onClose={() => setShowPopup(false)}>
           <MovieForm
@@ -186,6 +202,7 @@ export default function Movies() {
           />
         </Popup>
       )}
+
     </div>
   );
 }

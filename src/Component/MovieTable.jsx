@@ -1,6 +1,6 @@
 export default function MovieTable({ movies, handleEdit, handleDelete }) {
   return (
-    <table className="table table-bordered mt-3">
+    <table className="table table-bordered mt-3 table-striped">
       <thead className="table-dark text-center">
         <tr>
           <th>Thumbnail</th>
