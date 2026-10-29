@@ -4,7 +4,7 @@ import GenreFilter from "../Component/GenreFilter";
 import MovieTable from "../Component/MovieTable";
 import MovieForm from "../Component/MovieForm";
 import Popup from "../Component/Popup";
-import '../home.css'
+import '../Home.css'
 
 export default function Movies() {
 
